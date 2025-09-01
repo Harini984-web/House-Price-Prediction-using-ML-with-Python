@@ -1,0 +1,13 @@
+ID,City,BHK,Property Type,SqFt,Predicted Price (in ₹),Predicted Price (in words),User
+1,Bengaluru,2, Flat,959.0,25461000,"two crore, fifty-four lakh, sixty-one thousand rupees",harini
+2,Bengaluru,2,Villa,959.0,25377000,"two crore, fifty-three lakh, seventy-seven thousand rupees",harini
+3,Delhi,1,Apartment,959.0,25464000,"two crore, fifty-four lakh, sixty-four thousand rupees",harini
+4,Delhi,4,Apartment,1459.0,25489000,"two crore, fifty-four lakh, eighty-nine thousand rupees",harini
+5,Ahmedabad,3, Flat,1346.0,25464000,"two crore, fifty-four lakh, sixty-four thousand rupees",user
+6,Delhi,2,Apartment,1200.0,25464000,"two crore, fifty-four lakh, sixty-four thousand rupees",harini
+7,Delhi,2,Apartment,1000.0,25464000,"two crore, fifty-four lakh, sixty-four thousand rupees",harini
+8,Ahmedabad,3, Flat,1346.0,25464000,"two crore, fifty-four lakh, sixty-four thousand rupees",harini
+9,Chennai,4,Villa,6975.0,82768762,eight crore twenty-seven lakh sixty-eight thousand seven hundred and sixty-two rupees,user
+10,Chennai,3,Villa,10000.0,52388324,five crore twenty-three lakh eighty-eight thousand three hundred and twenty-four rupees,kanishqka
+11,Theni,3,Villa,10000.0,55297452,five crore fifty-two lakh ninety-seven thousand four hundred and fifty-two rupees,kanishqka
+12,Anna Nagar,3,House,10000.0,27769436,two crore seventy-seven lakh sixty-nine thousand four hundred and thirty-six rupees,aritha
