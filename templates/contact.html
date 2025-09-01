@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("/static/mmm.webp");
+            background-size: cover;
+            background-attachment: fixed;
+            color: white;
+            padding: 30px;
+            margin-top: 50px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 30px;
+        }
+
+        .content {
+            background-color: rgba(255,255,255,0.9);
+            color: black;
+            padding: 20px;
+            border-radius: 10px;
+            width: 50%;
+            margin: auto;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+            background-color: #4CAF50;
+            padding: 10px 20px;
+            border-radius: 5px;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        a:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Contact Us</h1>
+
+    <div class="content">
+        <p>If you have any questions, feedback, or need support, feel free to reach out to us:</p>
+        <ul>
+            <li>Email: support@housepredictor.com</li>
+            <li>Phone: +91-9876543210</li>
+            <li>Address: 123 Real Estate Lane, Bengaluru, India</li>
+        </ul>
+    </div>
+
+    <a href="{{ url_for('index') }}">Back to Prediction</a>
+
+</body>
+</html>

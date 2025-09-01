@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>House Price Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("{{ url_for('static', filename='c1f95a5d814bb204e25a4f72ee6142b5.jpg') }}");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .navbar {
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar h2 {
+            color: whitesmoke;
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .logout-btn {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-left: 10px;
+        }
+
+        .logout-btn:hover {
+            background-color: #c82333;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 60px auto;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(15px);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+            color: #fff;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: whitesmoke;
+        }
+
+        label {
+            display: block;
+            margin: 12px 0 6px;
+            font-weight: bold;
+        }
+
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .prediction-box {
+            text-align: center;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: rgba(255,255,255,0.85);
+            font-size: 18px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-top: 10px;
+        }
+
+        .images-section {
+            margin-top: 60px;
+        }
+
+        .images-section h2 {
+            text-align: center;
+            color: whitesmoke;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 24px;
+        }
+
+        .images-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .images-container img {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.6);
+            transition: transform 0.3s ease;
+        }
+
+        .images-container img:hover {
+            transform: scale(1.03);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <h2>🏠 House Price Prediction</h2>
+        <div>
+            <a href="{{ url_for('home') }}" class="logout-btn">Home</a>
+            <a href="{{url_for('user_history')}}" class="logout-btn">My Predictions</a>
+            <a href="{{ url_for('admin') }}" class="logout-btn">Admin</a>
+            <a href="{{ url_for('contact') }}" class="logout-btn">Contact</a>
+            <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+        </div>
+    </div>
+
+    <!-- Glassmorphism Form -->
+    <div class="container">
+        <h1>Enter House Details</h1>
+        <form method="POST">
+            <label for="location">Location:</label>
+            <select name="location" required>
+                <option value="" disabled selected>Select Location</option>
+                {% for city in cities %}
+                    <option value="{{ city }}">{{ city }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="BHK">BHK:</label>
+            <input type="number" name="BHK" min="1" placeholder=" " required>
+
+            <label for="propertytype">Property Type:</label>
+            <select name="propertytype" required>
+                <option value="" disabled selected>Select Property Type</option>
+                <option value="Apartment">Apartment</option>
+                <option value="Villa">Villa</option>
+                <option value=" House"> House</option>
+                <option value=" Flat"> Flat</option>
+            </select>
+
+            <label for="sqft">Square Footage:</label>
+            <input type="number" name="sqft" min="100" placeholder=" " required>
+
+            <button type="submit">Predict</button>
+
+            {% if prediction %}
+            <div class="prediction-box">
+                Predicted Price: {{ prediction }}<br>
+                ({{ prediction_words }})
+            </div>
+            {% endif %}
+        </form>
+    </div>
+
+<!-- Images Section -->
+<div class="images-section">
+    <h2>House Images</h2>
+    <div class="images-container">
+        {% if house_images %}
+            {% for img_path in house_images %}
+                <img src="{{ img_path }}" alt="House image">
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+
+
+</body>
+</html>

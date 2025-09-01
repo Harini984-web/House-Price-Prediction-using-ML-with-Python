@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <style>
+        body{
+            background-image:url("/static/c1f95a5d814bb204e25a4f72ee6142b5.jpg");
+            background-repeat:no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+           h2{
+            margin-top:150px;
+            font-size:40px;
+            color:whitesmoke;
+        }
+        h1{
+            font-size:60px;
+            color:whitesmoke;
+        }
+        input[type=submit]{
+            background-color:whitesmoke;
+            color:black;
+            cursor:pointer;
+            padding: 16px 32px;
+            border-color: whitesmoke;
+        }
+    </style>
+</head>
+<body>
+    <h2>Welcome To</h2>
+   <h1>House Price Prediction System</h1>
+   <form action="{{ url_for('login') }}">
+       <input type="submit" value="START">
+   </form>
+</body>
+</html>

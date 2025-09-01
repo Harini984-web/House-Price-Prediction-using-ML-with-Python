@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Graphical Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: center;
+            background-color: #333;
+            padding: 14px;
+        }
+
+        .navbar a {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .navbar a:hover {
+            background-color: #575757;
+            border-radius: 4px;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .chart-container {
+            width: 90%;
+            max-width: 1100px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="{{ url_for('index') }}">User Prediction Page</a>
+        <a href="{{ url_for('admin') }}">Admin Table</a>
+        <a href="{{ url_for('home') }}">Home</a>
+        <a href="{{ url_for('logout') }}">Logout</a>
+    </div>
+
+    <h1>Graphical Price Analysis</h1>
+
+    <div class="chart-container">
+        <canvas id="priceChart"></canvas>
+    </div>
+
+    <!-- Safe JSON injection -->
+    <script id="labels-data" type="application/json">
+        {{ labels | tojson }}
+    </script>
+    <script id="values-data" type="application/json">
+        {{ values | tojson }}
+    </script>
+
+    <script>
+        const chartLabels = JSON.parse(document.getElementById('labels-data').textContent);
+        const chartValues = JSON.parse(document.getElementById('values-data').textContent);
+
+        // Generate random pastel colors
+        const backgroundColors = chartLabels.map(() => {
+            const hue = Math.floor(Math.random() * 360);
+            return `hsl(${hue}, 70%, 70%)`;
+        });
+
+        const ctx = document.getElementById('priceChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: chartLabels,
+                datasets: [{
+                    label: 'Predicted Price (in Lakhs)',
+                    data: chartValues,
+                    backgroundColor: backgroundColors,
+                    borderColor: backgroundColors,
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: false },
+                    title: {
+                        display: true,
+                        text: 'Average House Price by Location'
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return `${context.dataset.label}: ₹${context.parsed.y} Lakhs`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Price (Lakhs)'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Location'
+                        },
+                        ticks: {
+                            autoSkip: false,
+                            maxRotation: 45,
+                            minRotation: 45
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

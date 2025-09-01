@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard - Predictions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("/static/4d8310c820c85a7d59b462d0c6331b10.png");
+            background-size: cover;
+            background-attachment: fixed;
+            color: white;
+            padding: 30px;
+        }
+        h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        h2 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .button {
+            background-color: white;
+            color: black;
+            padding: 10px 20px;
+            margin: 10px 10px 20px 0;
+            display: inline-block;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        table {
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            color: black;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #444;
+            text-align: center;
+        }
+        th {
+            background-color: #222;
+            color: white;
+        }
+
+        .center-navbar {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .center-navbar .button {
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .center-navbar .button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Admin Dashboard</h1>
+    
+    <div class="center-navbar">
+        <a href="{{ url_for('graph') }}" class="button">Graph</a>
+        <a href="{{ url_for('upload') }}" class="button">Upload</a>
+        <a href="{{ url_for('index') }}" class="button">User Prediction Page</a>
+        <a href="{{ url_for('compare') }}" class="button">Compare Two Predictions</a>
+        <a href="{{ url_for('logout') }}" class="button">Logout</a>
+    </div>
+
+    <h2>User Submitted Inputs and Predicted Prices</h2>
+
+    {% if records %}
+    <table>
+        <tr>
+            <th>user_ID</th>
+            <th>City</th>
+            <th>BHK</th>
+            <th>Property Type</th>
+            <th>Size (SqFt)</th>
+            <th>Predicted Price (₹)</th>
+            <th>Price in Words</th>
+        </tr>
+        {% for row in records %}
+        <tr>
+            <td>{{ row.User}}</td>
+            <td>{{ row.City }}</td>
+            <td>{{ row.BHK }}</td>
+            <td>{{ row["Property Type"] }}</td>
+            <td>{{ row.SqFt }}</td>
+            <td>{{ row["Predicted Price (in ₹)"] }}</td>
+            <td>{{ row["Predicted Price (in words)"] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <p>No predictions submitted yet.</p>
+    {% endif %}
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User History</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: url("/static/dream-house-pictures-1600-x-1200-5e6lhgh2yki2mmbl.jpg");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+
+        /* Navbar styles */
+        .navbar {
+            background-color: #333;
+            overflow: hidden;
+            padding: 10px 0;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            padding: 14px 20px;
+            display: inline-block;
+            font-size: 17px;
+        }
+
+        .navbar a:hover {
+            background-color: #4CAF50;
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 30px;
+            color: #fff;
+        }
+
+        table {
+            margin: 30px auto;
+            border-collapse: collapse;
+            width: 90%;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .message {
+            text-align: center;
+            font-size: 18px;
+            color: #fff;
+            margin-top: 40px;
+        }
+
+        a.back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #4CAF50;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <a href="{{ url_for('home') }}">Home</a>
+        <a href="{{ url_for('user_history') }}">Prediction History</a>
+        <a href="{{ url_for('index') }}">Prediction</a>
+        <a href="{{ url_for('logout') }}">Logout</a>
+    </div>
+
+    <h2>User Prediction History</h2>
+
+    {% if message %}
+        <div class="message">{{ message }}</div>
+    {% elif records|length > 0 %}
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>City</th>
+                <th>BHK</th>
+                <th>Property Type</th>
+                <th>SqFt</th>
+                <th>Predicted Price (₹)</th>
+                <th>Price (in words)</th>
+            </tr>
+            {% for row in records %}
+            <tr>
+                <td>{{ row['ID'] }}</td>
+                <td>{{ row['City'] }}</td>
+                <td>{{ row['BHK'] }}</td>
+                <td>{{ row['Property Type'] }}</td>
+                <td>{{ row['SqFt'] }}</td>
+                <td>{{ row['Predicted Price (in ₹)'] }}</td>
+                <td>{{ row['Predicted Price (in words)'] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <div class="message">No records found.</div>
+    {% endif %}
+
+</body>
+</html>
